@@ -1,0 +1,20 @@
+AAPL	Apple Inc.
+ARCP	American Realty Capital Properties, Inc.
+BBRY	BlackBerry Limited
+CLDX	Celldex Therapeutics, Inc.
+CMCSA	Comcast Corporation	Comcast Corporation
+CSCO	Cisco Systems, Inc.
+FB		Facebook, Inc.	Facebook, Inc.
+GERN	Geron Corporation
+GILD	Gilead Sciences, Inc.
+GRPN	Groupon, Inc.
+INTC	Intel Corporation
+JD		JD.com, Inc.
+MSFT	Microsoft Corporation
+MU		Micron Technology, Inc.
+QQQ		PowerShares QQQ Trust, Series 1
+SIRI	Sirius XM Holdings Inc.
+SPLS	Staples, Inc.
+TVIX	VelocityShares Daily 2X VIX Short Term ETN
+YHOO	Yahoo! Inc.
+ZNGA	Zynga Inc.

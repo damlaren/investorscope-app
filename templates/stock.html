@@ -1,0 +1,93 @@
+<!-- The Stock page, to show a stock with price, chart, quants of interest -->
+
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+
+<title>InvestorScope – Stock</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<link href="static/css/invest.css" type='text/css' rel='stylesheet'>
+
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        
+        <a class="navbar-brand" href="home.html">INVESTORSCOPE</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- TODO improvements from heuristic eval:
+       1. Add more information like P/E ratio, market cap
+          (DONE?)
+       2. Indicate if market is open or closed (sigh...)
+       3. Show the company stock name and ticker (DONE) -->
+
+  <!-- TODO: lots of work to make it interactive...
+       1. Look up the stock!
+       2. Get hardcoded price, delta, other data from
+          common source
+       3. Add a 'why' section, but only if coming from
+          recommendation engine?
+       -->
+  
+  <!-- Begin page content -->
+  <div class="container" style="margin-top: 70px; font-size: medium;">
+    <div class="row raleway text-center">
+      <div class="col-md-12"><strong>Apple Inc. (AAPL)</strong></div>
+    </div>
+
+    <!--
+    <div class="row raleway text-center">
+      <div class="col-md-6">$113.99</div>
+      <div class="col-md-6" style="color: green;">+$2.14</div>
+    </div> -->
+
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Price:</td>
+          <td><span style="padding-right: 12px;">$116.59</span><span style="color: green;">+$2.14</span></td>
+        </tr>
+        <tr>
+          <td>P/E Ratio:</td>
+          <td>17.67</td>
+        </tr>
+        <tr>
+          <td>Market Cap:</td>
+          <td>$677B</td>
+        </tr>
+        <tr>
+          <td>Dividend Yield:</td>
+          <td>1.6%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- The stock chart itself: this will be complex. -->
+    <div>
+      <img class="img-responsive img-center" src="static/images/chart.png"/>
+    </div>
+
+  </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+</body></html>
