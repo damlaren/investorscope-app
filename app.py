@@ -2,7 +2,6 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask.ext.mongoengine import MongoEngine
 
-
 # ------------------------------
 # Setting up the program.
 # ------------------------------
@@ -16,6 +15,7 @@ app.config['MONGODB_SETTINGS'] = {
 }
 db = MongoEngine(app)
 
+import models # must be after db created
 
 # ------------------------------
 # TEST: Ensure functional mongo
