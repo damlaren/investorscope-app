@@ -16,7 +16,7 @@ h1, h2, h3 {
 }
 
 /* Center an image. Don't think this exists in bootstrap. */
-.img-center {
+.centered {
     display: block;
     margin-left: auto;
     margin-right: auto;
