@@ -1,7 +1,38 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
+from flask.ext.mongoengine import MongoEngine
 
+
+# ------------------------------
+# Setting up the program.
+# ------------------------------
 app = Flask(__name__)
+app.config['MONGODB_SETTINGS'] = {
+	'db': 'investorscope',
+	'host': 'ds053300.mongolab.com',
+	'port': 53300,
+	'username': 'dkhavari',
+	'password': 'invest'
+}
+db = MongoEngine(app)
+
+
+# ------------------------------
+# TEST: Ensure functional mongo
+# ------------------------------
+
+# class Person(db.Document):
+# 	name = db.StringField()
+# 	meta = {
+# 		'collection': 'users'
+# 	}
+
+# collection = Person._get_collection()
+# collection.insert({'name': 'david'})
+
+# ------------------------------
+# END TEST: Ensure func. mongo
+# ------------------------------
 
 @app.route("/home.html")
 @app.route("/")
