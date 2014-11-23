@@ -48,5 +48,4 @@ def login():
         except PasswordError:
             form.password.errors.append("Incorrect password.")
         
-    #TODO: error messages for missing username, pword        
     return render_template("login.html", form=form)
