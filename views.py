@@ -2,11 +2,14 @@ from app import app
 from flask import render_template, request, redirect, url_for
 from models import Stock, User, UsernameError, PasswordError
 from forms import LoginForm
+from account import user_is_logged_in, user_log_in, user_log_out
 
 # Home screen.
 @app.route("/home.html")
 @app.route("/")
 def home():
+    if not user_is_logged_in():
+        return redirect(url_for("login"))
     return render_template("home.html")
 
 # Search form submission from home.
@@ -18,11 +21,15 @@ def submit_search():
 # Q&A stock recommender.
 @app.route("/question.html")
 def question():
+    if not user_is_logged_in():
+        return redirect(url_for("login"))
     return render_template("question.html")
 
 # Stock data page.
 @app.route("/stock.html")
 def stock():
+    if not user_is_logged_in():
+        return redirect(url_for("login"))
     ticker = request.args.get("ticker", "AAPL")
 
     # Find the stock.
@@ -31,16 +38,23 @@ def stock():
     return render_template("stock.html", ticker=stock.ticker, name=stock.name,
                            latest_price=stock.latest_price)
 
-# Login page. TODO: POST to do the login
+# Login page.
 @app.route("/login.html", methods=["GET", "POST"])
 def login():
+    if user_is_logged_in():
+        return redirect(url_for("home"))
+
     form = LoginForm(request.form)
     
-    #TODO: check session if user already logged in
     if request.method == "POST" and form.validate():
         try:
             User.check_user_password(form.username.data,
                                      form.password.data)
+
+            # password is good (no exceptions thrown)
+            # TODO: logout button somewhere
+            user_log_in()
+            
             return redirect(url_for("home"))
         except UsernameError:
             #TODO: what is "the right way" to add new errors?

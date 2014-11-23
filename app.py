@@ -15,6 +15,9 @@ app.config['MONGODB_SETTINGS'] = {
 }
 db = MongoEngine(app)
 
+# add a super-secret key so sessions work
+#app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
 # ------------------------------
 # TEST: Ensure functional mongo
 # ------------------------------
