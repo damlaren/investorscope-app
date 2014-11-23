@@ -1,18 +1,20 @@
 body > nav > div > div.navbar-header > a {
-	font-family: 'Raleway', Helvetica, Arial, sans-serif;
+	font-family: 'Garamond', serif;
+	font-size: 200%;
 }
 
 td {
-	font-family: 'Raleway', Helvetica, Arial, sans-serif;
+	font-family: 'Garamond', serif;
+	font-size: 125%
 }
 
-h1, h2, h3 {
-	font-family: 'Raleway', Helvetica, Arial, sans-serif;
+input {
+	font-family: 'Garamond', serif;
 }
 
-/* ... The font. */
-.raleway {
-        font-family: 'Raleway', Helvetica, Arial, sans-serif;
+h2, h3 {
+	font-family: 'Garamond', serif;
+	font-size: 150%;
 }
 
 /* Center an image. Don't think this exists in bootstrap. */
