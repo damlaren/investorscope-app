@@ -10,10 +10,35 @@
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Gilda+Display' rel='stylesheet' type='text/css'>
 <link href="static/css/invest.css" type='text/css' rel='stylesheet'>
 
+<!-- JQuery Autocomplete Stuff -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+<script>
+$(function() {
+  var availableTags = [];
+
+  console.log("About to do it!")
+
+  {% for ticker in tickers %}
+  availableTags.push( {{ ticker|tojson|safe }} );
+  {% endfor %}
+
+  console.log(availableTags)
+
+  $( "#tags" ).autocomplete({
+    source: availableTags
+  });
+});
+</script>
+
 </head>
+
+
 
 <body>
 
@@ -22,7 +47,7 @@
     <div class="container">
       <div class="navbar-header">
         
-        <a class="navbar-brand" href="#">INVESTORSCOPE</a>
+        <a class="navbar-brand" href="#">InvestorScope</a>
       </div>
     </div>
   </nav>
@@ -31,11 +56,8 @@
   <div class="container" style="margin-top: 60px">
 
     <form class="navbar-form navbar-left" role="search" action="submit_search" method="post">
-      <div class="form-group">
-        <!-- TODO: autocomplete would be nice for search.
-	     Otherwise need a page to suggest stocks, or to say a stock wasn't
-	     found. -->
-        <input type="text" class="form-control" placeholder="Search for a company name or ticker." name="search_string">
+      <div class="form-group ui-widget">
+        <input type="text" class="form-control" style="font-size: 150%" id="tags" placeholder="Search by name or ticker." name="search_string">
       </div>
     </form>
 
@@ -187,7 +209,6 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
   </body></html>

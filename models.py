@@ -11,7 +11,13 @@ class Stock(db.DynamicDocument):
     ticker = db.StringField()
     name = db.StringField()
     latest_price = db.FloatField()
-    # TODO: sustainability, freshness, whatever
+    market_cap = db.StringField()
+    price_earnings = db.FloatField()
+    eps = db.FloatField()
+    dividends = db.StringField()
+    one_year_est = db.FloatField()
+    beta = db.FloatField()
+    # Add more as necessary.
 
     def __repr__(self):
         return ticker
@@ -28,6 +34,11 @@ class Stock(db.DynamicDocument):
         if results_size == 0:
             return Stock()
         return sub_collection[0]
+
+    @staticmethod
+    def get_all_tickers():
+        all_tickers = Stock.objects.distinct('ticker')
+        return all_tickers
 
 # Users, Usernames, Passwords
 class UsernameError(Exception):

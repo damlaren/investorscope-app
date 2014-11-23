@@ -10,7 +10,8 @@ from account import user_is_logged_in, user_log_in, user_log_out
 def home():
     if not user_is_logged_in():
         return redirect(url_for("login"))
-    return render_template("home.html")
+    tickers = Stock.get_all_tickers()
+    return render_template("home.html", tickers=tickers)
 
 # Search form submission from home.
 @app.route("/submit_search", methods=["POST"])
