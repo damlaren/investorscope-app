@@ -43,9 +43,10 @@ def login():
                                      form.password.data)
             return redirect(url_for("home"))
         except UsernameError:
-            pass # TODO err message
+            #TODO: what is "the right way" to add new errors?
+            form.username.errors.append("Unrecognized username.")
         except PasswordError:
-            pass # TODO err message
+            form.password.errors.append("Incorrect password.")
         
     #TODO: error messages for missing username, pword        
     return render_template("login.html", form=form)
