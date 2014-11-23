@@ -50,39 +50,33 @@ class User(db.DynamicDocument):
     username = db.StringField()
     password = db.StringField() #yayaya.
 
-    def __init__(self):
-        username = None
-        password = None
-
     def __repr__(self):
         return username
 
     # Get a User from DB by username.
     # - username: Username ...
     @staticmethod
-    def get_user_from_db(username):
-        if not username:
+    def get_user_from_db(username_string):
+        if not username_string:
             raise ValueError()
 
         # Look for this user.
-        sub_collection = User.objects(username=username)
+        sub_collection = User.objects(username=username_string)
         results_size = len(sub_collection)
         if results_size == 0:
-            raise UsernameError()        
+            raise UsernameError()
         return sub_collection[0]
 
-    # Return True if password and username match. Raise exception if not.
+    # Check if password and username are correct. Raise exception if not.
     # - username: Username
     # - password: The password...
     @staticmethod
     def check_user_password(username, password):
-        user = User.get_user_from_db(username) # throws UsernameException
+        user = User.get_user_from_db(username) # throws UsernameError
 
         if not password:
             raise ValueError()
 
         # Check if password matches.
         if user.password != password:
-            raise PasswordError( )
-
-        return True
+            raise PasswordError()

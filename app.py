@@ -23,6 +23,10 @@ from models import Stock
 collection = Stock._get_collection()
 collection.insert({'ticker': 'AAPL', 'name': 'Apple Inc.', 'latest_price': 120})
 
+from models import User
+collection = User._get_collection()
+collection.insert({'username': 'x', 'password': 'x'})
+
 # ------------------------------
 # END TEST: Ensure func. mongo
 # ------------------------------

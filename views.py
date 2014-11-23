@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect, url_for
-from models import Stock, User
+from models import Stock, User, UsernameError, PasswordError
 from forms import LoginForm
 
 # Home screen.
@@ -35,9 +35,17 @@ def stock():
 @app.route("/login.html", methods=["GET", "POST"])
 def login():
     form = LoginForm(request.form)
-    #TODO: error messages for missing username, pword
+    
     #TODO: check session if user already logged in
     if request.method == "POST" and form.validate():
-        #TODO check that username and password are correct
-        return redirect(url_for("home"))
+        try:
+            User.check_user_password(form.username.data,
+                                     form.password.data)
+            return redirect(url_for("home"))
+        except UsernameError:
+            pass # TODO err message
+        except PasswordError:
+            pass # TODO err message
+        
+    #TODO: error messages for missing username, pword        
     return render_template("login.html", form=form)
