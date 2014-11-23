@@ -34,10 +34,24 @@
       <!-- Ignoring hidden_tag() and CSRF protection. -->
       {{ form.csrf_token }}
       <p>
-        Username:<br/>
+	{% if form.username.errors %}
+	<ul>
+	  {% for error in form.username.errors %}
+ 	  <li class="error">{{ error }}</li>
+	  {% endfor %}
+	</ul>
+	{% endif %}
+	Username:<br/>
         {{ form.username(size=80) }}<br/>
       </p>
       <p>
+	{% if form.password.errors %}
+	<ul>
+	  {% for error in form.password.errors %}
+	  <li class="error">{{ error }}</li>
+	  {% endfor %}
+	</ul>
+	{% endif %}
 	Password:<br/>
 	{{ form.password(size=80) }}<br/>
       </p>
