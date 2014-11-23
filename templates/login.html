@@ -29,9 +29,21 @@
 
   <!-- Begin page content -->
   <div class="container" style="margin-top: 60px">
-    yay
+    <h1>Sign In</h1>
+    <form action="login.html" method="post" name="login">
+      <!-- Ignoring hidden_tag() and CSRF protection. -->
+      {{ form.csrf_token }}
+      <p>
+        Username:<br/>
+        {{ form.username(size=80) }}<br/>
+      </p>
+      <p>
+	Password:<br/>
+	{{ form.password(size=80) }}<br/>
+      </p>
+      <p><input type="submit" value="Sign In"></p>
+    </form>
   </div>
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -39,4 +51,4 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-  </body></html>
+</body></html>
