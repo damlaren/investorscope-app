@@ -6,7 +6,8 @@ from flask import render_template, request, redirect, url_for
 @app.route("/home.html")
 @app.route("/")
 def home():
-    return render_template("home.html")
+	tickers = Stock.get_all_tickers()
+	return render_template("home.html", tickers=tickers)
 
 # Search form submission from home.
 @app.route("/submit_search", methods=["POST"])

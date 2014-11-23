@@ -17,6 +17,14 @@ h2, h3 {
 	font-size: 150%;
 }
 
+#tags {
+	font-family: 'Gilda Display', serif;
+}
+
+.ui-menu-item {
+	font-family: 'Gilda Display', serif;
+}
+
 /* Center an image. Don't think this exists in bootstrap. */
 .centered {
     display: block;
