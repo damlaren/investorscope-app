@@ -38,10 +38,8 @@ def stock():
     stock = Stock.get_stock_from_db(ticker)
     
     return render_template("stock.html", ticker = stock.ticker,
-                           name = stock.name,
-                           latest_price = stock.latest_price,
-                           pe_ratio = stock.price_earnings,
-                           market_cap = stock.market_cap,
+                           name = stock.name, latest_price = stock.cur_price,
+                           pe_ratio = stock.pe, market_cap = stock.cap,
                            dividends = stock.dividends)
 
 # Login page.

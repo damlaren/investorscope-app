@@ -22,9 +22,10 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 # TEST: Ensure functional mongo
 # ------------------------------
 
-from models import User
-collection = User._get_collection()
-collection.insert({'username': 'x', 'password': 'x'})
+# TODO: oh my... we seem to have added this many times...
+#from models import User
+#collection = User._get_collection()
+#collection.insert({'username': 'x', 'password': 'x'})
 
 # ------------------------------
 # END TEST: Ensure func. mongo

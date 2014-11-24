@@ -10,10 +10,10 @@ class Stock(db.DynamicDocument):
     # Model variables.
     ticker = db.StringField()
     name = db.StringField()
-    latest_price = db.FloatField()
-    market_cap = db.StringField()
-    price_earnings = db.FloatField()
-    eps = db.FloatField()
+    cur_price = db.StringField(db_field = "cur-price") # TODO: some are wrong
+    cap = db.StringField() # market cap
+    pe = db.FloatField() # price/earnings ratio
+    eps = db.FloatField() # earnings per share
     dividends = db.StringField()
     one_year_est = db.FloatField()
     beta = db.FloatField()
@@ -28,7 +28,6 @@ class Stock(db.DynamicDocument):
     def get_stock_from_db(ticker_string):
         if not ticker_string:
             raise ValueError()
-
         sub_collection = Stock.objects(ticker=ticker_string.upper())
         results_size = len(sub_collection)
         if results_size == 0:
