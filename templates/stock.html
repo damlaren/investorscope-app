@@ -32,19 +32,13 @@
   </nav>
 
   <!-- TODO improvements from heuristic eval:
-       1. Add more information like P/E ratio, market cap
-          (DONE?)
        2. Indicate if market is open or closed (sigh...)
-       3. Show the company stock name and ticker (DONE) -->
 
-  <!-- TODO: lots of work to make it interactive...
-       1. Look up the stock!
-       2. Get hardcoded price, delta, other data from
-          common source
+  <!-- TODO: interactivity...
        3. Add a 'why' section, but only if coming from
           recommendation engine?
        -->
-  
+
   <!-- Begin page content -->
   <div class="container" style="margin-top: 60px;">
     <div class="row text-center">
@@ -59,15 +53,15 @@
         </tr>
         <tr>
           <td>P/E Ratio:</td>
-          <td>17.67</td>
+          <td>{{ pe_ratio }}</td>
         </tr>
         <tr>
           <td>Market Cap:</td>
-          <td>$677B</td>
+          <td>${{ market_cap }}</td>
         </tr>
         <tr>
           <td>Dividend Yield:</td>
-          <td>1.6%</td>
+          <td>{{ dividends }}%</td>
         </tr>
       </tbody>
     </table>

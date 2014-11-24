@@ -12,13 +12,13 @@ def home():
         return redirect(url_for("login"))
     tickers = Stock.get_all_tickers()
     stocks = Stock.get_stocks(20)
-    return render_template("home.html", tickers=tickers, stocks=stocks)
+    return render_template("home.html", tickers = tickers, stocks = stocks)
 
 # Search form submission from home.
 @app.route("/submit_search", methods=["POST"])
 def submit_search():
     ticker = request.form["search_string"]
-    return redirect(url_for("stock", ticker=ticker))
+    return redirect(url_for("stock", ticker = ticker))
 
 # Q&A stock recommender.
 @app.route("/question.html")
@@ -32,13 +32,17 @@ def question():
 def stock():
     if not user_is_logged_in():
         return redirect(url_for("login"))
-    ticker = request.args.get("ticker", "AAPL")
+    ticker = request.args.get("ticker", "AAPL") # default is AAPL
 
     # Find the stock.
     stock = Stock.get_stock_from_db(ticker)
     
-    return render_template("stock.html", ticker=stock.ticker, name=stock.name,
-                           latest_price=stock.latest_price)
+    return render_template("stock.html", ticker = stock.ticker,
+                           name = stock.name,
+                           latest_price = stock.latest_price,
+                           pe_ratio = stock.price_earnings,
+                           market_cap = stock.market_cap,
+                           dividends = stock.dividends)
 
 # Login page.
 @app.route("/login.html", methods=["GET", "POST"])
