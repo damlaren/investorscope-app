@@ -22,10 +22,6 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 # TEST: Ensure functional mongo
 # ------------------------------
 
-from models import Stock
-collection = Stock._get_collection()
-collection.insert({'ticker': 'AAPL', 'name': 'Apple Inc.', 'latest_price': 120})
-
 from models import User
 collection = User._get_collection()
 collection.insert({'username': 'x', 'password': 'x'})

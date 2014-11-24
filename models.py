@@ -35,6 +35,13 @@ class Stock(db.DynamicDocument):
             return Stock()
         return sub_collection[0]
 
+    # Get <n> stocks (for display on home page).
+    # TODO: later, desirable to get stocks sorted by some metric
+    @staticmethod
+    def get_stocks(n):
+        return Stock.objects[:n]
+
+    # Get all stock tickers, no limits
     @staticmethod
     def get_all_tickers():
         all_tickers = Stock.objects.distinct('ticker')

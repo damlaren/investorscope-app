@@ -11,7 +11,8 @@ def home():
     if not user_is_logged_in():
         return redirect(url_for("login"))
     tickers = Stock.get_all_tickers()
-    return render_template("home.html", tickers=tickers)
+    stocks = Stock.get_stocks(20)
+    return render_template("home.html", tickers=tickers, stocks=stocks)
 
 # Search form submission from home.
 @app.route("/submit_search", methods=["POST"])
