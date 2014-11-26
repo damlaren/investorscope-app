@@ -73,8 +73,7 @@ $(function() {
       <tbody>
 	{% for stock in stocks %}
 	<tr>
-	  <td>{{stock.ticker}}</td>
-	  <td>{{stock.name}}</td>
+	  <td>{{stock.ticker}}: {{stock.name}}</td>
 	  <td>${{stock.cur_price}}</td>
 	  <td><button onclick="location.href='stock.html?ticker={{stock.ticker}}'" type="button" class="btn btn-success" style="display: block; width: 100%;">VIEW <span class="glyphicon glyphicon-arrow-right"></span></button></td>
 	</tr>
