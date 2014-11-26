@@ -73,7 +73,7 @@ $(function() {
       <tbody>
 	{% for stock in stocks %}
 	<tr style="font-size: 75%">
-	  <td style="max-width: 90px">{{stock.ticker}}: {{stock.name}}</td>
+	  <td style="max-width: 90px">{{stock.ticker}}: {{stock.name | truncate(15, True)}}</td>
 	  <td>${{stock.cur_price}}</td>
 	  <td><button onclick="location.href='stock.html?ticker={{stock.ticker}}'" type="button" class="btn btn-success" style="display: block;">VIEW <span class="glyphicon glyphicon-arrow-right"></span></button></td>
 	</tr>
