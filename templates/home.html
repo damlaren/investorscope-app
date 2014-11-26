@@ -72,10 +72,10 @@ $(function() {
     <table class="table">
       <tbody>
 	{% for stock in stocks %}
-	<tr>
+	<tr style="font-size: 75%">
 	  <td>{{stock.ticker}}: {{stock.name}}</td>
 	  <td>${{stock.cur_price}}</td>
-	  <td><button onclick="location.href='stock.html?ticker={{stock.ticker}}'" type="button" class="btn btn-success" style="display: block; width: 100%;">VIEW <span class="glyphicon glyphicon-arrow-right"></span></button></td>
+	  <td><button onclick="location.href='stock.html?ticker={{stock.ticker}}'" type="button" class="btn btn-success" style="display: block;">VIEW <span class="glyphicon glyphicon-arrow-right"></span></button></td>
 	</tr>
 	{% endfor %}
       </tbody>
