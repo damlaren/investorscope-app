@@ -36,11 +36,28 @@ def stock():
 
     # Find the stock.
     stock = Stock.get_stock_from_db(ticker)
-    
+
+    # Get the prices with corresponding dates.
+    # Produce formatted date strings to paste into HTML.
+    price_time_series = Stock.get_time_series(ticker)
+    price_dates = price_time_series.keys()
+    price_dates.sort()
+    price_dates_str = []
+    price_values = []
+    for curr_date in price_dates:
+        price_values.append(price_time_series[curr_date])
+        price_dates_str.append(curr_date.strftime("%m-%d"))
+
+    # Compute price change now-- consistent with time series data!
+    price_change = price_values[-1] - price_values[-2]
+
     return render_template("stock.html", ticker = stock.ticker,
                            name = stock.name, latest_price = stock.cur_price,
                            pe_ratio = stock.pe, market_cap = stock.cap,
-                           dividends = stock.dividends)
+                           dividends = stock.dividends,
+                           price_change = price_change,
+                           price_series_dates = price_dates_str,
+                           price_series_values = price_values)
 
 # Login page.
 @app.route("/login.html", methods=["GET", "POST"])

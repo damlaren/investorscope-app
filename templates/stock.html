@@ -48,8 +48,12 @@
     <table class="table">
       <tbody>
         <tr>
+	  <!-- Show the price. A little fugly. -->
           <td>Price:</td>
-          <td><span style="padding-right: 12px;">${{ latest_price }}</span><span style="color: green;">+$TODO</span></td>
+	  <td>
+	    <span style="padding-right: 12px;">${{ latest_price }}</span>
+	    <span style="color: {{ 'green' if price_change > 0 else 'red' }}">{{ '+' if price_change > 0 else '' }}{{ price_change }}</span>
+	  </td>
         </tr>
         <tr>
           <td>P/E Ratio:</td>
@@ -73,7 +77,7 @@
 
       <script type="text/javascript">
 	var data = {
-	labels: ["11-14", "11-15", "11-16", "11-17", "11-18", "11-19", "11-20"],
+	labels: {{ price_series_dates | safe}},
 	datasets: [
         {
         label: "My First dataset",
@@ -83,7 +87,7 @@
         pointStrokeColor: "#2C3E50",
         pointHighlightFill: "#F1A9A0",
         pointHighlightStroke: "#F64747",
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: {{ price_series_values }}
         }
 	]
 	};

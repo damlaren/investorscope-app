@@ -1,4 +1,6 @@
 from app import db
+from random import seed, randrange
+from datetime import date, timedelta
 
 class Stock(db.DynamicDocument):
 
@@ -31,7 +33,7 @@ class Stock(db.DynamicDocument):
         sub_collection = Stock.objects(ticker=ticker_string.upper())
         results_size = len(sub_collection)
         if results_size == 0:
-            return Stock()
+            return Stock() #TODO: not that useful...
         return sub_collection[0]
 
     # Get <n> stocks (for display on home page).
@@ -45,6 +47,33 @@ class Stock(db.DynamicDocument):
     def get_all_tickers():
         all_tickers = Stock.objects.distinct('ticker')
         return all_tickers
+
+    # Get historic stock data for last 7 days.
+    # - ticker_string: Stock to retrive data for.
+    # returns series of prices from last week (rounded to 2 decimal places),
+    #         as a map from datetime.date -> price ($)
+    @staticmethod
+    def get_time_series(ticker_string):
+        seed(ticker_string)
+        stock = Stock.get_stock_from_db(ticker_string)
+        base_price = stock.cur_price
+
+        # work backwards for 6 more days
+        percent = 1.0
+        maxchange = 0.02 # max change (%) per day
+        brackets = 100
+        dt = timedelta(1) # 1-day time difference
+        curr_day = date.today() # not bothering with TZ correction for prototype
+        series = dict()
+        series[curr_day] = base_price
+        for i in range(0, 6):
+            # go up or down by some percent each day
+            curr_day -= dt
+            delta = (float(randrange(0, brackets)) / brackets - 0.5) * maxchange
+            percent += delta
+            price = round(percent * base_price, 2)
+            series[curr_day] = price
+        return series
 
 # Users, Usernames, Passwords
 class UsernameError(Exception):
