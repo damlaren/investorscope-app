@@ -50,10 +50,11 @@ class Stock(db.DynamicDocument):
 
     # Get historic stock data for last 7 days.
     # - ticker_string: Stock to retrive data for.
+    # - num_days: # of days for which to retrieve data
     # returns series of prices from last week (rounded to 2 decimal places),
     #         as a map from datetime.date -> price ($)
     @staticmethod
-    def get_time_series(ticker_string):
+    def get_time_series(ticker_string, num_days):
         seed(ticker_string)
         stock = Stock.get_stock_from_db(ticker_string)
         base_price = stock.cur_price
@@ -66,11 +67,13 @@ class Stock(db.DynamicDocument):
         curr_day = date.today() # not bothering with TZ correction for prototype
         series = dict()
         series[curr_day] = base_price
-        for i in range(0, 6):
+        for i in range(0, num_days):
             # go up or down by some percent each day
             curr_day -= dt
             delta = (float(randrange(0, brackets)) / brackets - 0.5) * maxchange
             percent += delta
+            if percent < 0:
+                percent = 0
             price = round(percent * base_price, 2)
             series[curr_day] = price
         return series

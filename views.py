@@ -39,7 +39,7 @@ def stock():
 
     # Get the prices with corresponding dates.
     # Produce formatted date strings to paste into HTML.
-    price_time_series = Stock.get_time_series(ticker)
+    price_time_series = Stock.get_time_series(ticker, 14)
     price_dates = price_time_series.keys()
     price_dates.sort()
     price_dates_str = []

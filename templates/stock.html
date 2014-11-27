@@ -32,7 +32,7 @@
   </nav>
 
   <!-- TODO improvements from heuristic eval:
-       2. Indicate if market is open or closed (sigh...)
+       2. Indicate if market is open or closed (sigh...) -->
 
   <!-- TODO: interactivity...
        3. Add a 'why' section, but only if coming from
@@ -94,7 +94,9 @@
 	// Get the context of the canvas element we want to select
 	var ctx = document.getElementById("myChart").getContext("2d");
 	var myLineChart = new Chart(ctx).Line(data, {
-	    bezierCurve: false
+	    bezierCurve: false,
+	    pointDot: false,
+	    showTooltips: false
 	});
       </script>
 
