@@ -93,7 +93,9 @@
 	};
 	// Get the context of the canvas element we want to select
 	var ctx = document.getElementById("myChart").getContext("2d");
-	var myLineChart = new Chart(ctx).Line(data, {});
+	var myLineChart = new Chart(ctx).Line(data, {
+	    bezierCurve: false
+	});
       </script>
 
     </div>
