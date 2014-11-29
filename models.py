@@ -12,13 +12,13 @@ class Stock(db.DynamicDocument):
     # Model variables.
     ticker = db.StringField()
     name = db.StringField()
-    cur_price = db.StringField(db_field = "cur-price") # TODO: some are wrong
+    cur_price = db.StringField(db_field = "cur-price")
     cap = db.StringField() # market cap
-    pe = db.FloatField() # price/earnings ratio
-    eps = db.FloatField() # earnings per share
+    pe = db.StringField() # price/earnings ratio
+    eps = db.StringField() # earnings per share
     dividends = db.StringField()
     one_year_est = db.FloatField()
-    beta = db.FloatField()
+    beta = db.StringField()
     # Add more as necessary.
 
     def __repr__(self):
@@ -36,11 +36,37 @@ class Stock(db.DynamicDocument):
             return Stock() #TODO: not that useful...
         return sub_collection[0]
 
-    # Get <n> stocks (for display on home page).
-    # TODO: later, desirable to get stocks sorted by some metric
+    # Get list of stocks that aren't all screwed up.
+    @staticmethod
+    def get_valid_stocks():
+        return Stock.objects(cur_price__ne="Inc.").filter(cur_price__ne="L.P.")
+
+    # Get <n> stocks with no specified sort order, just alphabetical.
+    # But filter 
     @staticmethod
     def get_stocks(n):
-        return Stock.objects[:n]
+        return Stock.get_valid_stocks()[:n]
+
+    # Get <n> stocks sorted by pe ratio
+    @staticmethod
+    def get_stocks_sorted_by_pe(n, ascending):
+        order_str = "pe" if ascending else "-pe"
+        return Stock.get_valid_stocks().filter(pe__ne="N/A").order_by(order_str)[:n]
+
+    # Get <n> stocks sorted by market cap
+    # TODO: why are so many market caps 0?
+    # TODO: this doesn't work. market cap is a string, and annoying to convert.
+    @staticmethod
+    def get_stocks_sorted_by_cap(n, ascending):
+        order_str = "cap" if ascending else "-cap"
+        return Stock.get_valid_stocks().order_by(order_str)[:n]
+
+    # Get <n> stocks sorted by risk (beta)
+    # High beta = high risk
+    @staticmethod
+    def get_stocks_sorted_by_risk(n, ascending):
+        order_str = "beta" if ascending else "-beta"
+        return Stock.get_valid_stocks().filter(beta__ne="N/A").order_by(order_str)[:n]
 
     # Get all stock tickers, no limits
     @staticmethod

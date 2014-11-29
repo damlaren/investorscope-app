@@ -55,6 +55,7 @@ def stock():
                            name = stock.name, latest_price = stock.cur_price,
                            pe_ratio = stock.pe, market_cap = stock.cap,
                            dividends = stock.dividends,
+                           beta = stock.beta,
                            price_change = price_change,
                            price_series_dates = price_dates_str,
                            price_series_values = price_values)
