@@ -19,6 +19,7 @@
 <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 <script>
+// Fill in autocomplete tickers.
 $(function() {
   var availableTags = [];
 
@@ -34,6 +35,43 @@ $(function() {
     source: availableTags
   });
 });
+</script>
+
+<script>
+  // Refresh stock page with a given metric and sort order.
+  // - metric: Sorting metric to use.
+  // - ascending: true to sort in ascending order.
+  function refreshStocks(metric, ascending) {
+    window.location.replace("home.html?metric=" + metric + "&order=" + ascending);
+  }
+  
+  // Event handler to refresh stock tickers on select.
+  function selectAction(selectedValue) {
+    if (selectedValue == "alpha-az") {
+      refreshStocks("alpha", true);
+    }
+    else if (selectedValue == "alpha-za") {
+      refreshStocks("alpha", false);
+    }
+    else if (selectedValue == "price-lowhigh") {
+      refreshStocks("price", true);
+    }
+    else if (selectedValue == "price-highlow") {
+      refreshStocks("price", false);
+    }
+    else if (selectedValue == "pe-lowhigh") {
+      refreshStocks("pe", true);
+    }
+    else if (selectedValue == "pe-highlow") {
+      refreshStocks("pe", false);
+    }
+    else if (selectedValue == "risk-lowhigh") {
+      refreshStocks("risk", true);
+    }
+    else if (selectedValue == "risk-highlow") {
+      refreshStocks("risk", false);
+    }
+  }
 </script>
 
 </head>
@@ -63,7 +101,7 @@ $(function() {
 
     <div class="page-header" style="text-align: center; margin-top: 0">
       <h1>
-        <select class="form-control">
+        <select class="form-control" onchange="selectAction(this.value)">
           <option value="alpha-az">Alphabetical (A-Z)</option>
           <option value="alpha-za">Alphabetical (Z-A)</option>
           <option value="price-lowhigh">Price (Low-High)</option>

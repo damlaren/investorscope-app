@@ -12,16 +12,29 @@ def home():
     if not user_is_logged_in():
         return redirect(url_for("login"))
 
+    # Get all stock tickers, and default stocks and sort order
     tickers = Stock.get_all_tickers()
-    stocks = Stock.get_stocks(N_STOCKS) # default: list of stocks by alpha order
+    order = True # ascending by default
+    stocks = Stock.get_stocks(N_STOCKS, order)
 
     metric = request.args.get("metric", "")
-    if metric == "price":
-        stocks = Stock.get_stocks_sorted_by_price(N_STOCKS, True)
+    order_arg = request.args.get("order")
+    if order_arg is not None:
+        if order_arg == "true":
+            order = True
+        elif order_arg == "false":
+            order = False
+
+    print "metric=" + metric + " order=" + str(order_arg)
+    
+    if metric == "alpha":
+        stocks = Stock.get_stocks(N_STOCKS, order)
+    elif metric == "price":
+        stocks = Stock.get_stocks_sorted_by_price(N_STOCKS, order)
     elif metric == "pe":
-        stocks = Stock.get_stocks_sorted_by_pe(N_STOCKS, True)
+        stocks = Stock.get_stocks_sorted_by_pe(N_STOCKS, order)
     elif metric == "risk":
-        stocks = Stock.get_stocks_sorted_by_risk(N_STOCKS, True)
+        stocks = Stock.get_stocks_sorted_by_risk(N_STOCKS, order)
 
     return render_template("home.html", tickers = tickers, stocks = stocks)
 

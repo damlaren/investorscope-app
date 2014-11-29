@@ -44,8 +44,9 @@ class Stock(db.DynamicDocument):
     # Get <n> stocks with no specified sort order, just alphabetical.
     # But filter 
     @staticmethod
-    def get_stocks(n):
-        return Stock.get_valid_stocks()[:n]
+    def get_stocks(n, ascending):
+        order_str = "ticker" if ascending else "-ticker"
+        return Stock.get_valid_stocks().order_by(order_str)[:n]
 
     # Get <n> stocks sorted by pe ratio
     @staticmethod
