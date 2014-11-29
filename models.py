@@ -2,6 +2,7 @@ from app import db
 from random import seed, randrange
 from datetime import date, timedelta
 
+
 class Stock(db.DynamicDocument):
 
     # Meta variables.
@@ -33,7 +34,7 @@ class Stock(db.DynamicDocument):
         sub_collection = Stock.objects(ticker=ticker_string.upper())
         results_size = len(sub_collection)
         if results_size == 0:
-            return Stock() #TODO: not that useful...
+            return -1 # Create a way of propagating the error here.
         return sub_collection[0]
 
     # Get list of stocks that aren't all screwed up.
@@ -164,3 +165,16 @@ class User(db.DynamicDocument):
         # Check if password matches.
         if user.password != password:
             raise PasswordError()
+
+
+class Question(db.DynamicDocument):
+
+    meta = {
+        "collection": "questions"
+    }
+
+    prompt = db.StringField()
+    choices = [db.StringField()]
+
+    def __repr__(self):
+        return prompt

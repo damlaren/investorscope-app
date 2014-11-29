@@ -33,6 +33,19 @@ li.error {
 	font-family: 'Gilda Display', serif;
 }
 
+.jumbotron {
+	background-color: #3FC380;
+	color: white;
+}
+
+.jumbotron.question {
+	background-color: #ECECEC;
+	border-radius: 10px;
+	color: black;
+	margin-top: 10;
+	margin-bottom: 10;
+}
+
 /* Center an image. Don't think this exists in bootstrap. */
 .centered {
     display: block;
@@ -40,9 +53,40 @@ li.error {
     margin-right: auto;
 }
 
+#navbar > ul > li > a {
+	font-family: 'Gilda Display', serif;
+}
+
+/* Some button styles */
+.btn.btn-success {
+	background-color: #3FC380;
+	border-color: #3FC380;
+	border-radius: 10px;
+}
+
+.btn.btn-success:hover {
+	background-color: #1E824C;
+	border-color: #1E824C;
+	border-radius: 10px;
+}
+
+.btn.btn-select {
+	width: 100%;
+}
+
+.btn.btn-select:hover {
+	background-color: #3FC380;
+	color: white;
+	width: 100%;
+}
+
 /* Error message. */
 .error {
     color: red;
+}
+
+.alert {
+	font-family: 'Gilda Display', serif;
 }
 
 .black {

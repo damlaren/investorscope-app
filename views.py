@@ -44,13 +44,6 @@ def submit_search():
     ticker = request.form["search_string"]
     return redirect(url_for("stock", ticker = ticker))
 
-# Q&A stock recommender.
-@app.route("/question.html")
-def question():
-    if not user_is_logged_in():
-        return redirect(url_for("login"))
-    return render_template("question.html")
-
 # Stock data page.
 @app.route("/stock.html")
 def stock():
@@ -60,6 +53,22 @@ def stock():
 
     # Find the stock.
     stock = Stock.get_stock_from_db(ticker)
+
+    # Check for errors.
+    if stock == -1:
+        N_STOCKS = 20 # number of stocks to retrieve
+        tickers = Stock.get_all_tickers()
+        stocks = Stock.get_stocks(N_STOCKS) # default: list of stocks by alpha order
+
+        metric = request.args.get("metric", "")
+        if metric == "price":
+            stocks = Stock.get_stocks_sorted_by_price(N_STOCKS, True)
+        elif metric == "pe":
+            stocks = Stock.get_stocks_sorted_by_pe(N_STOCKS, True)
+        elif metric == "risk":
+            stocks = Stock.get_stocks_sorted_by_risk(N_STOCKS, True)
+
+        return render_template("home.html", error="No ticker matching that name could be found.", tickers = tickers, stocks = stocks)
 
     # Get the prices with corresponding dates.
     # Produce formatted date strings to paste into HTML.
@@ -109,3 +118,36 @@ def login():
             form.password.errors.append("Incorrect password.")
         
     return render_template("login.html", form=form)
+
+# --------------------------------------------------
+# Faked-up question and recommendation routing.
+# --------------------------------------------------
+
+# Question page one.
+@app.route("/question.html")
+def question():
+    if not user_is_logged_in():
+        return redirect(url_for("login"))
+    return render_template("question.html")
+
+# Question page two.
+@app.route("/question-two.html")
+def question_two():
+    if not user_is_logged_in():
+        return redirect(url_for("login"))
+    return render_template("question-two.html")
+
+# Question page three.
+@app.route("/question-three.html")
+def question_three():
+    if not user_is_logged_in():
+        return redirect(url_for("login"))
+    return render_template("question-three.html")
+
+# Recommended page.
+@app.route("/recommended.html")
+def recommend():
+    if not user_is_logged_in():
+        return redirect(url_for("login"))
+    return "This is where the recommended page will be."
+
