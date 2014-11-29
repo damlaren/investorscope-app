@@ -61,12 +61,24 @@ $(function() {
       </div>
     </form>
 
-    <div class="page-header" style="text-align: center">
+    <div class="page-header" style="text-align: center; margin-top: 0">
       <h1>
+        <select class="form-control">
+          <option value="alpha-az">Alphabetical (A-Z)</option>
+          <option value="alpha-za">Alphabetical (Z-A)</option>
+          <option value="price-lowhigh">Price (Low-High)</option>
+          <option value="price-highlow">Price (High-Low)</option>
+          <option value="pe-lowhigh">P/E (Low-High)</option>
+          <option value="pe-highlow">P/E (High-Low)</option>
+          <option value="risk-lowhigh">Risk (Low-High)</option>
+          <option value="risk-highlow">Risk (High-Low)</option>
+        </select>
+        <!--
         <a href="home.html"><span class="glyphicon glyphicon-certificate"></span></a>
         <a href="home.html?metric=price"><span class="glyphicon glyphicon-circle-arrow-down"></span></a>
         <a href="home.html?metric=pe"><span class="glyphicon glyphicon-credit-card"></span></a>
         <a href="home.html?metric=risk"><span class="glyphicon glyphicon-flash"></span></a>
+        -->
       </h1>
     </div>
     <table class="table">
