@@ -20,11 +20,11 @@ def home():
     metric = request.args.get("metric", "")
     order_arg = request.args.get("order")
     if order_arg is not None:
-        if order_arg == "true":
+        if order_arg == "lowhigh":
             order = True
-        elif order_arg == "false":
+        elif order_arg == "highlow":
             order = False
-    
+
     if metric == "alpha":
         stocks = Stock.get_stocks(N_STOCKS, order)
     elif metric == "price":
@@ -34,7 +34,8 @@ def home():
     elif metric == "risk":
         stocks = Stock.get_stocks_sorted_by_risk(N_STOCKS, order)
 
-    return render_template("home.html", tickers = tickers, stocks = stocks)
+    return render_template("home.html", tickers = tickers, stocks = stocks,
+                           metric = metric, order = order)
 
 # Search form submission from home.
 @app.route("/submit_search", methods=["POST"])

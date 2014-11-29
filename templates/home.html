@@ -38,39 +38,22 @@ $(function() {
 </script>
 
 <script>
-  // Refresh stock page with a given metric and sort order.
-  // - metric: Sorting metric to use.
-  // - ascending: true to sort in ascending order.
-  function refreshStocks(metric, ascending) {
-    window.location.replace("home.html?metric=" + metric + "&order=" + ascending);
-  }
-  
   // Event handler to refresh stock tickers on select.
   function selectAction(selectedValue) {
-    if (selectedValue == "alpha-az") {
-      refreshStocks("alpha", true);
+    var res = selectedValue.split("-");
+    var metric = res[0];
+    var order = res[1];
+    window.location.replace("home.html?metric=" + metric + "&order=" + order);
+  }
+
+  // Pre-select field value based on current metric and sort order.
+  function preselect() {
+    var f = document.getElementById("sort-select");
+    var order_str = "lowhigh";
+    if ("{{ order }}" == "False") {
+      order_str = "highlow";
     }
-    else if (selectedValue == "alpha-za") {
-      refreshStocks("alpha", false);
-    }
-    else if (selectedValue == "price-lowhigh") {
-      refreshStocks("price", true);
-    }
-    else if (selectedValue == "price-highlow") {
-      refreshStocks("price", false);
-    }
-    else if (selectedValue == "pe-lowhigh") {
-      refreshStocks("pe", true);
-    }
-    else if (selectedValue == "pe-highlow") {
-      refreshStocks("pe", false);
-    }
-    else if (selectedValue == "risk-lowhigh") {
-      refreshStocks("risk", true);
-    }
-    else if (selectedValue == "risk-highlow") {
-      refreshStocks("risk", false);
-    }
+    f.value = "{{ metric }}" + "-" + order_str;
   }
 </script>
 
@@ -78,7 +61,7 @@ $(function() {
 
 
 
-<body>
+<body onload="preselect()">
 
   <!-- Fixed navbar -->
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -101,9 +84,16 @@ $(function() {
 
     <div class="page-header" style="text-align: center; margin-top: 0">
       <h1>
-        <select class="form-control" onchange="selectAction(this.value)">
-          <option value="alpha-az">Alphabetical (A-Z)</option>
-          <option value="alpha-za">Alphabetical (Z-A)</option>
+	<!-- When adding more options to this form, always follow the format:
+	     
+	     <metric>-<order>
+		 
+	     with metric in {"alpha", "price", "pe", "risk"} (TODO more...)
+	     and order in {"lowhigh", "highlow"}. -->
+        <select id="sort-select" class="form-control"
+		onchange="selectAction(this.value)">
+          <option value="alpha-lowhigh">Alphabetical (A-Z)</option>
+          <option value="alpha-highlow">Alphabetical (Z-A)</option>
           <option value="price-lowhigh">Price (Low-High)</option>
           <option value="price-highlow">Price (High-Low)</option>
           <option value="pe-lowhigh">P/E (Low-High)</option>
