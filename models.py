@@ -53,6 +53,14 @@ class Stock(db.DynamicDocument):
         order_str = "pe" if ascending else "-pe"
         return Stock.get_valid_stocks().filter(pe__ne="N/A").order_by(order_str)[:n]
 
+    # Get <n> stocks sorted by price
+    # TODO: there's more than a few stocks with price = 0.
+    # Time to invest in MOOG?
+    @staticmethod
+    def get_stocks_sorted_by_price(n, ascending):
+        order_str = "cur_price" if ascending else "-cur_price"
+        return Stock.get_valid_stocks().filter(cur_price__ne=0).order_by(order_str)[:n]
+
     # Get <n> stocks sorted by market cap
     # TODO: why are so many market caps 0?
     # TODO: this doesn't work. market cap is a string, and annoying to convert.

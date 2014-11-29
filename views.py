@@ -8,10 +8,21 @@ from account import user_is_logged_in, user_log_in, user_log_out
 @app.route("/home.html")
 @app.route("/")
 def home():
+    N_STOCKS = 20 # number of stocks to retrieve
     if not user_is_logged_in():
         return redirect(url_for("login"))
+
     tickers = Stock.get_all_tickers()
-    stocks = Stock.get_stocks(20)
+    stocks = Stock.get_stocks(N_STOCKS) # default: list of stocks by alpha order
+
+    metric = request.args.get("metric", "")
+    if metric == "price":
+        stocks = Stock.get_stocks_sorted_by_price(N_STOCKS, True)
+    elif metric == "pe":
+        stocks = Stock.get_stocks_sorted_by_pe(N_STOCKS, True)
+    elif metric == "risk":
+        stocks = Stock.get_stocks_sorted_by_risk(N_STOCKS, True)
+
     return render_template("home.html", tickers = tickers, stocks = stocks)
 
 # Search form submission from home.
