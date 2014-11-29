@@ -43,14 +43,14 @@ def question():
 def stock():
     if not user_is_logged_in():
         return redirect(url_for("login"))
-    ticker = request.args.get("ticker", "AAPL") # default is AAPL
+    ticker = request.args.get("ticker", "AAPL") # TODO: no ticker is error...
 
     # Find the stock.
     stock = Stock.get_stock_from_db(ticker)
 
     # Get the prices with corresponding dates.
     # Produce formatted date strings to paste into HTML.
-    price_time_series = Stock.get_time_series(ticker, 14)
+    price_time_series = Stock.get_time_series(ticker, 7)
     price_dates = price_time_series.keys()
     price_dates.sort()
     price_dates_str = []
