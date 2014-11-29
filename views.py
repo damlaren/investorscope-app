@@ -12,19 +12,20 @@ def home():
     if not user_is_logged_in():
         return redirect(url_for("login"))
 
-    # Get all stock tickers, and default stocks and sort order
+    # Get all stock tickers
     tickers = Stock.get_all_tickers()
-    order = True # ascending by default
-    stocks = Stock.get_stocks(N_STOCKS, order)
 
-    metric = request.args.get("metric", "")
-    order_arg = request.args.get("order")
-    if order_arg is not None:
-        if order_arg == "lowhigh":
-            order = True
-        elif order_arg == "highlow":
-            order = False
+    # Get default sorting metric and order 
+    order = None
+    metric = request.args.get("metric", "alpha")
+    order_arg = request.args.get("order", "lowhigh")
+    if order_arg == "lowhigh":
+        order = True
+    elif order_arg == "highlow":
+        order = False
 
+    # Get sorted stocks
+    stocks = None
     if metric == "alpha":
         stocks = Stock.get_stocks(N_STOCKS, order)
     elif metric == "price":
