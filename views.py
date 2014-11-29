@@ -24,8 +24,6 @@ def home():
             order = True
         elif order_arg == "false":
             order = False
-
-    print "metric=" + metric + " order=" + str(order_arg)
     
     if metric == "alpha":
         stocks = Stock.get_stocks(N_STOCKS, order)
