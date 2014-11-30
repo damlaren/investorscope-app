@@ -23,14 +23,6 @@
 
   {% include 'navbar.html' %}
 
-  <!-- TODO improvements from heuristic eval:
-       2. Indicate if market is open or closed (sigh...) -->
-
-  <!-- TODO: interactivity...
-       3. Add a 'why' section, but only if coming from
-          recommendation engine?
-       -->
-
   <!-- Begin page content -->
   <div class="container" style="margin-top: 60px;">
     <div class="row text-center">
@@ -65,6 +57,13 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- The recommendation blurb, if the stock is recommended. -->
+    {% if recommended %}
+      <p>
+	This stock is suggested by our proprietary recommendation engine for its strong past performance and future growth potential.
+      </p>
+    {% endif %}
 
     <!-- The stock chart itself: this will be complex. -->
     <div>

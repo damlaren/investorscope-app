@@ -83,6 +83,12 @@ def stock():
     # Compute price change now-- consistent with time series data!
     price_change = price_values[-1] - price_values[-2]
 
+    # Put a blurb in the stock page if it is recommended.
+    stock_is_recommended = False
+    if account.user_has_recommendations():
+        if stock.ticker in Stock.recommended_tickers:
+            stock_is_recommended = True
+
     return render_template("stock.html", ticker = stock.ticker,
                            name = stock.name, latest_price = stock.cur_price,
                            pe_ratio = stock.pe, market_cap = stock.cap,
@@ -90,7 +96,8 @@ def stock():
                            beta = stock.beta,
                            price_change = price_change,
                            price_series_dates = price_dates_str,
-                           price_series_values = price_values)
+                           price_series_values = price_values,
+                           recommended = stock_is_recommended)
 
 # Login page.
 @app.route("/login.html", methods=["GET", "POST"])
