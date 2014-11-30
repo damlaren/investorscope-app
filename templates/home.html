@@ -46,14 +46,26 @@ $(function() {
     window.location.replace("home.html?metric=" + metric + "&order=" + order);
   }
 
-  // Pre-select field value based on current metric and sort order.
-  function preselect() {
-    var f = document.getElementById("sort-select");
+  // Set up select dropdown:
+  // - Set field value based on current metric and sort order.
+  // - Add an extra option for recommended stocks, if the user has done Q & A.
+  function setupSelect() {
+    var selectElement = document.getElementById("sort-select");
+
+    // recommended option
+    if ("{{ has_recs }}" == "True") {
+      var option = document.createElement("option");
+      option.text = "Recommendations";
+      option.value = "recs-lowhigh";
+      selectElement.add(option);
+    }
+
+    // pre-selection... makes sure to do it after recs option is added!
     var order_str = "lowhigh";
     if ("{{ order }}" == "False") {
       order_str = "highlow";
     }
-    f.value = "{{ metric }}" + "-" + order_str;
+    selectElement.value = "{{ metric }}" + "-" + order_str;
   }
 </script>
 
@@ -61,7 +73,7 @@ $(function() {
 
 
 
-<body onload="preselect()">
+<body onload="setupSelect()">
 
   {% include 'navbar.html' %}
 

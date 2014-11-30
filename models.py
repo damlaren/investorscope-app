@@ -114,6 +114,15 @@ class Stock(db.DynamicDocument):
             series[curr_day] = price
         return series
 
+    # Get a list of stocks from our state of the art recommendation engine.
+    @staticmethod
+    def get_recommendations():
+        tickers = ["ABX", "AFSD", "BBL", "BDN", "CAJ",
+                   "CHA", "COF", "DSW", "EMN", "EVGN",
+                   "FGP", "GD", "GE", "HHC", "IGI",
+                   "JMI", "KMX", "LQ", "QIHU", "RBS"]
+        return Stock.objects(ticker__in=tickers)
+
 # Users, Usernames, Passwords
 class UsernameError(Exception):
     def __init__(self):
