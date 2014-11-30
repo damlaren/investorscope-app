@@ -22,6 +22,11 @@ class Stock(db.DynamicDocument):
     beta = db.StringField()
     # Add more as necessary.
 
+    recommended_tickers = ["ABX", "AFSD", "BBL", "BDN", "CAJ",
+                           "CHA", "COF", "DSW", "EMN", "EVGN",
+                           "FGP", "GD", "GE", "HHC", "IGI",
+                           "JMI", "KMX", "LQ", "QIHU", "RBS"]
+
     def __repr__(self):
         return ticker
 
@@ -117,11 +122,7 @@ class Stock(db.DynamicDocument):
     # Get a list of stocks from our state of the art recommendation engine.
     @staticmethod
     def get_recommendations():
-        tickers = ["ABX", "AFSD", "BBL", "BDN", "CAJ",
-                   "CHA", "COF", "DSW", "EMN", "EVGN",
-                   "FGP", "GD", "GE", "HHC", "IGI",
-                   "JMI", "KMX", "LQ", "QIHU", "RBS"]
-        return Stock.objects(ticker__in=tickers)
+        return Stock.objects(ticker__in=Stock.recommended_tickers)
 
 # Users, Usernames, Passwords
 class UsernameError(Exception):
