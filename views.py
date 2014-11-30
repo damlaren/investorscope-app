@@ -117,6 +117,12 @@ def login():
         
     return render_template("login.html", form=form)
 
+# Logout route.
+@app.route("/logout.html")
+def logout():
+    account.user_log_out()
+    return redirect(url_for("login"))
+
 # --------------------------------------------------
 # Faked-up question and recommendation routing.
 # --------------------------------------------------
