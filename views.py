@@ -96,6 +96,7 @@ def stock():
                            pe_ratio = stock.pe, market_cap = stock.cap,
                            dividends = stock.dividends,
                            beta = stock.beta,
+                           sustainability = stock.sustainability,
                            price_change = price_change,
                            price_series_dates = price_dates_str,
                            price_series_values = price_values,
