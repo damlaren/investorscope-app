@@ -36,6 +36,8 @@ def home():
         stocks = Stock.get_stocks_sorted_by_risk(N_STOCKS, order)
     elif metric == "recs":
         stocks = Stock.get_recommendations()
+    elif metric == "sustainability":
+        stocks = Stock.get_stocks_sorted_by_sustainability(N_STOCKS, order)
 
     return render_template("home.html", tickers = tickers, stocks = stocks,
                            metric = metric, order = order,

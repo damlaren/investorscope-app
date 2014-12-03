@@ -20,6 +20,7 @@ class Stock(db.DynamicDocument):
     dividends = db.StringField()
     one_year_est = db.FloatField()
     beta = db.StringField()
+    sustainability = db.StringField()
     # Add more as necessary.
 
     recommended_tickers = ["ABX", "AFSD", "BBL", "BDN", "CAJ",
@@ -69,7 +70,6 @@ class Stock(db.DynamicDocument):
         return Stock.get_valid_stocks().filter(cur_price__ne=0).order_by(order_str)[:n]
 
     # Get <n> stocks sorted by market cap
-    # TODO: why are so many market caps 0?
     # TODO: this doesn't work. market cap is a string, and annoying to convert.
     @staticmethod
     def get_stocks_sorted_by_cap(n, ascending):
@@ -82,6 +82,12 @@ class Stock(db.DynamicDocument):
     def get_stocks_sorted_by_risk(n, ascending):
         order_str = "beta" if ascending else "-beta"
         return Stock.get_valid_stocks().filter(beta__ne="N/A").order_by(order_str)[:n]
+
+    # Get <n> stocks sorted by sustainability rating.
+    @staticmethod
+    def get_stocks_sorted_by_sustainability(n, ascending):
+        order_str = "sustainability" if ascending else "-sustainability"
+        return Stock.get_valid_stocks().order_by(order_str)[:n]
 
     # Get all stock tickers, no limits
     @staticmethod
