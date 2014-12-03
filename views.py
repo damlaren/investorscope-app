@@ -114,14 +114,17 @@ def login():
 
             # password is good (no exceptions thrown)
             account.user_log_in()
-            
-            return redirect(url_for("home"))
+
+            # When a "new user" first logs in, they go straight to the QA page.
+            # We do this for the purpose of our demo-- in a real app, the user
+            # would only go through this process the very first time they log in.
+            return redirect(url_for("question"))
         except UsernameError:
             #TODO: what is "the right way" to add new errors?
             form.username.errors.append("Unrecognized username.")
         except PasswordError:
             form.password.errors.append("Incorrect password.")
-        
+            
     return render_template("login.html", form=form)
 
 # Logout route.
