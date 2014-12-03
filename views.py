@@ -17,7 +17,7 @@ def home():
 
     # Get default sorting metric and order 
     order = None
-    metric = request.args.get("metric", "alpha")
+    metric = request.args.get("metric", "recs")
     order_arg = request.args.get("order", "lowhigh")
     if order_arg == "lowhigh":
         order = True
