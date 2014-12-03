@@ -52,15 +52,7 @@ $(function() {
   function setupSelect() {
     var selectElement = document.getElementById("sort-select");
 
-    // recommended option
-    if ("{{ has_recs }}" == "True") {
-      var option = document.createElement("option");
-      option.text = "Recommendations";
-      option.value = "recs-lowhigh";
-      selectElement.add(option);
-    }
-
-    // pre-selection... makes sure to do it after recs option is added!
+    // pre-selection
     var order_str = "lowhigh";
     if ("{{ order }}" == "False") {
       order_str = "highlow";
@@ -104,6 +96,7 @@ $(function() {
 	     and order in {"lowhigh", "highlow"}. -->
         <select id="sort-select" class="form-control"
 		onchange="selectAction(this.value)">
+	  <option value="recs-lowhigh">Recommendations</option>
           <option value="alpha-lowhigh">Alphabetical (A-Z)</option>
           <option value="alpha-highlow">Alphabetical (Z-A)</option>
           <option value="price-lowhigh">Price (Low-High)</option>
