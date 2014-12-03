@@ -38,6 +38,10 @@ def home():
         stocks = Stock.get_recommendations()
     elif metric == "sustainability":
         stocks = Stock.get_stocks_sorted_by_sustainability(N_STOCKS, order)
+    elif metric == "socialgood":
+        stocks = Stock.get_stocks_sorted_by_socialgood(N_STOCKS, order)
+    elif metric == "american":
+        stocks = Stock.get_stocks_sorted_by_american(N_STOCKS, order)
 
     return render_template("home.html", tickers = tickers, stocks = stocks,
                            metric = metric, order = order,
@@ -97,6 +101,8 @@ def stock():
                            dividends = stock.dividends,
                            beta = stock.beta,
                            sustainability = stock.sustainability,
+                           socialgood = stock.socialgood,
+                           american = stock.american,
                            price_change = price_change,
                            price_series_dates = price_dates_str,
                            price_series_values = price_values,

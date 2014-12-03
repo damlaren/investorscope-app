@@ -21,6 +21,8 @@ class Stock(db.DynamicDocument):
     one_year_est = db.FloatField()
     beta = db.StringField()
     sustainability = db.StringField()
+    socialgood = db.StringField()
+    american = db.StringField()
     # Add more as necessary.
 
     recommended_tickers = ["ABX", "AFSD", "BBL", "BDN", "CAJ",
@@ -89,6 +91,18 @@ class Stock(db.DynamicDocument):
         order_str = "sustainability" if ascending else "-sustainability"
         return Stock.get_valid_stocks().order_by(order_str)[:n]
 
+    # Get <n> stocks sorted by social good rating.
+    @staticmethod
+    def get_stocks_sorted_by_socialgood(n, ascending):
+        order_str = "socialgood" if ascending else "-socialgood"
+        return Stock.get_valid_stocks().order_by(order_str)[:n]
+
+    # Get <n> stocks sorted by "made in america" rating.
+    @staticmethod
+    def get_stocks_sorted_by_american(n, ascending):
+        order_str = "american" if ascending else "-american"
+        return Stock.get_valid_stocks().order_by(order_str)[:n]
+        
     # Get all stock tickers, no limits
     @staticmethod
     def get_all_tickers():
