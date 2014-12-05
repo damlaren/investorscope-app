@@ -80,6 +80,11 @@ li.error {
 	width: 100%;
 }
 
+/* Definition list descriptions. */
+dl dd {
+    padding-left: 10pt;
+}
+
 /* Error message. */
 .error {
     color: red;
