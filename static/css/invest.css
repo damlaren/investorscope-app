@@ -17,6 +17,10 @@ h1, h2, h3 {
 	font-size: 150%;
 }
 
+h4 {
+	font-family: 'Gilda Display', serif;
+}
+
 p {
 	font-family: 'Gilda Display', serif;
 }
@@ -44,6 +48,10 @@ li.error {
 	color: black;
 	margin-top: 10;
 	margin-bottom: 10;
+}
+
+.jumbotron.header {
+	background-color: #59ABE3;
 }
 
 /* Center an image. Don't think this exists in bootstrap. */
@@ -78,11 +86,6 @@ li.error {
 	background-color: #3FC380;
 	color: white;
 	width: 100%;
-}
-
-/* Definition list descriptions. */
-dl dd {
-    padding-left: 10pt;
 }
 
 /* Error message. */
