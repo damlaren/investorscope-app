@@ -106,7 +106,7 @@ class Stock(db.DynamicDocument):
     # Get all stock tickers, no limits
     @staticmethod
     def get_all_tickers():
-        all_tickers = Stock.objects.distinct('ticker')
+        all_tickers = Stock.get_valid_stocks().distinct('ticker')
         return all_tickers
 
     # Get historic stock data for last 7 days.

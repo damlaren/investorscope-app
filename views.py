@@ -108,6 +108,13 @@ def stock():
                            price_series_values = price_values,
                            recommended = stock_is_recommended)
 
+# Glossary of Investing Terms
+@app.route("/glossary.html", methods=["GET"])
+def glossary():
+    if not account.user_is_logged_in():
+        return redirect(url_for("login"))
+    return render_template("glossary.html")
+
 # Login page.
 @app.route("/login.html", methods=["GET", "POST"])
 def login():
